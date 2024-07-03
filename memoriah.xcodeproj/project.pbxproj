@@ -1,0 +1,610 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		315E4D712C35E38300FB99EC /* memoriahApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4D702C35E38300FB99EC /* memoriahApp.swift */; };
+		315E4D732C35E38300FB99EC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4D722C35E38300FB99EC /* ContentView.swift */; };
+		315E4D752C35E38500FB99EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 315E4D742C35E38500FB99EC /* Assets.xcassets */; };
+		315E4D782C35E38500FB99EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 315E4D772C35E38500FB99EC /* Preview Assets.xcassets */; };
+		315E4D7A2C35E38500FB99EC /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4D792C35E38500FB99EC /* Persistence.swift */; };
+		315E4D7D2C35E38500FB99EC /* memoriah.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 315E4D7B2C35E38500FB99EC /* memoriah.xcdatamodeld */; };
+		315E4D872C35E38500FB99EC /* memoriahTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4D862C35E38500FB99EC /* memoriahTests.swift */; };
+		315E4D912C35E38500FB99EC /* memoriahUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4D902C35E38500FB99EC /* memoriahUITests.swift */; };
+		315E4D932C35E38500FB99EC /* memoriahUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4D922C35E38500FB99EC /* memoriahUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		315E4D832C35E38500FB99EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 315E4D652C35E38200FB99EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 315E4D6C2C35E38300FB99EC;
+			remoteInfo = memoriah;
+		};
+		315E4D8D2C35E38500FB99EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 315E4D652C35E38200FB99EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 315E4D6C2C35E38300FB99EC;
+			remoteInfo = memoriah;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		315E4D6D2C35E38300FB99EC /* memoriah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = memoriah.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		315E4D702C35E38300FB99EC /* memoriahApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memoriahApp.swift; sourceTree = "<group>"; };
+		315E4D722C35E38300FB99EC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		315E4D742C35E38500FB99EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		315E4D772C35E38500FB99EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		315E4D792C35E38500FB99EC /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		315E4D7C2C35E38500FB99EC /* memoriah.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = memoriah.xcdatamodel; sourceTree = "<group>"; };
+		315E4D822C35E38500FB99EC /* memoriahTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = memoriahTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		315E4D862C35E38500FB99EC /* memoriahTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memoriahTests.swift; sourceTree = "<group>"; };
+		315E4D8C2C35E38500FB99EC /* memoriahUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = memoriahUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		315E4D902C35E38500FB99EC /* memoriahUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memoriahUITests.swift; sourceTree = "<group>"; };
+		315E4D922C35E38500FB99EC /* memoriahUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memoriahUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		315E4D6A2C35E38300FB99EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		315E4D7F2C35E38500FB99EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		315E4D892C35E38500FB99EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		315E4D642C35E38200FB99EC = {
+			isa = PBXGroup;
+			children = (
+				315E4D6F2C35E38300FB99EC /* memoriah */,
+				315E4D852C35E38500FB99EC /* memoriahTests */,
+				315E4D8F2C35E38500FB99EC /* memoriahUITests */,
+				315E4D6E2C35E38300FB99EC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		315E4D6E2C35E38300FB99EC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				315E4D6D2C35E38300FB99EC /* memoriah.app */,
+				315E4D822C35E38500FB99EC /* memoriahTests.xctest */,
+				315E4D8C2C35E38500FB99EC /* memoriahUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		315E4D6F2C35E38300FB99EC /* memoriah */ = {
+			isa = PBXGroup;
+			children = (
+				315E4D702C35E38300FB99EC /* memoriahApp.swift */,
+				315E4D722C35E38300FB99EC /* ContentView.swift */,
+				315E4D742C35E38500FB99EC /* Assets.xcassets */,
+				315E4D792C35E38500FB99EC /* Persistence.swift */,
+				315E4D7B2C35E38500FB99EC /* memoriah.xcdatamodeld */,
+				315E4D762C35E38500FB99EC /* Preview Content */,
+			);
+			path = memoriah;
+			sourceTree = "<group>";
+		};
+		315E4D762C35E38500FB99EC /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				315E4D772C35E38500FB99EC /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		315E4D852C35E38500FB99EC /* memoriahTests */ = {
+			isa = PBXGroup;
+			children = (
+				315E4D862C35E38500FB99EC /* memoriahTests.swift */,
+			);
+			path = memoriahTests;
+			sourceTree = "<group>";
+		};
+		315E4D8F2C35E38500FB99EC /* memoriahUITests */ = {
+			isa = PBXGroup;
+			children = (
+				315E4D902C35E38500FB99EC /* memoriahUITests.swift */,
+				315E4D922C35E38500FB99EC /* memoriahUITestsLaunchTests.swift */,
+			);
+			path = memoriahUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		315E4D6C2C35E38300FB99EC /* memoriah */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 315E4D962C35E38500FB99EC /* Build configuration list for PBXNativeTarget "memoriah" */;
+			buildPhases = (
+				315E4D692C35E38300FB99EC /* Sources */,
+				315E4D6A2C35E38300FB99EC /* Frameworks */,
+				315E4D6B2C35E38300FB99EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = memoriah;
+			productName = memoriah;
+			productReference = 315E4D6D2C35E38300FB99EC /* memoriah.app */;
+			productType = "com.apple.product-type.application";
+		};
+		315E4D812C35E38500FB99EC /* memoriahTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 315E4D992C35E38500FB99EC /* Build configuration list for PBXNativeTarget "memoriahTests" */;
+			buildPhases = (
+				315E4D7E2C35E38500FB99EC /* Sources */,
+				315E4D7F2C35E38500FB99EC /* Frameworks */,
+				315E4D802C35E38500FB99EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				315E4D842C35E38500FB99EC /* PBXTargetDependency */,
+			);
+			name = memoriahTests;
+			productName = memoriahTests;
+			productReference = 315E4D822C35E38500FB99EC /* memoriahTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		315E4D8B2C35E38500FB99EC /* memoriahUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 315E4D9C2C35E38500FB99EC /* Build configuration list for PBXNativeTarget "memoriahUITests" */;
+			buildPhases = (
+				315E4D882C35E38500FB99EC /* Sources */,
+				315E4D892C35E38500FB99EC /* Frameworks */,
+				315E4D8A2C35E38500FB99EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				315E4D8E2C35E38500FB99EC /* PBXTargetDependency */,
+			);
+			name = memoriahUITests;
+			productName = memoriahUITests;
+			productReference = 315E4D8C2C35E38500FB99EC /* memoriahUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		315E4D652C35E38200FB99EC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					315E4D6C2C35E38300FB99EC = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					315E4D812C35E38500FB99EC = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 315E4D6C2C35E38300FB99EC;
+					};
+					315E4D8B2C35E38500FB99EC = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 315E4D6C2C35E38300FB99EC;
+					};
+				};
+			};
+			buildConfigurationList = 315E4D682C35E38200FB99EC /* Build configuration list for PBXProject "memoriah" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 315E4D642C35E38200FB99EC;
+			productRefGroup = 315E4D6E2C35E38300FB99EC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				315E4D6C2C35E38300FB99EC /* memoriah */,
+				315E4D812C35E38500FB99EC /* memoriahTests */,
+				315E4D8B2C35E38500FB99EC /* memoriahUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		315E4D6B2C35E38300FB99EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				315E4D782C35E38500FB99EC /* Preview Assets.xcassets in Resources */,
+				315E4D752C35E38500FB99EC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		315E4D802C35E38500FB99EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		315E4D8A2C35E38500FB99EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		315E4D692C35E38300FB99EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				315E4D7A2C35E38500FB99EC /* Persistence.swift in Sources */,
+				315E4D732C35E38300FB99EC /* ContentView.swift in Sources */,
+				315E4D712C35E38300FB99EC /* memoriahApp.swift in Sources */,
+				315E4D7D2C35E38500FB99EC /* memoriah.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		315E4D7E2C35E38500FB99EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				315E4D872C35E38500FB99EC /* memoriahTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		315E4D882C35E38500FB99EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				315E4D932C35E38500FB99EC /* memoriahUITestsLaunchTests.swift in Sources */,
+				315E4D912C35E38500FB99EC /* memoriahUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		315E4D842C35E38500FB99EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 315E4D6C2C35E38300FB99EC /* memoriah */;
+			targetProxy = 315E4D832C35E38500FB99EC /* PBXContainerItemProxy */;
+		};
+		315E4D8E2C35E38500FB99EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 315E4D6C2C35E38300FB99EC /* memoriah */;
+			targetProxy = 315E4D8D2C35E38500FB99EC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		315E4D942C35E38500FB99EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		315E4D952C35E38500FB99EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		315E4D972C35E38500FB99EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"memoriah/Preview Content\"";
+				DEVELOPMENT_TEAM = MK26S2J3QC;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rairai.memoriah;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		315E4D982C35E38500FB99EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"memoriah/Preview Content\"";
+				DEVELOPMENT_TEAM = MK26S2J3QC;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rairai.memoriah;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		315E4D9A2C35E38500FB99EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MK26S2J3QC;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rairai.memoriahTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/memoriah.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/memoriah";
+			};
+			name = Debug;
+		};
+		315E4D9B2C35E38500FB99EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MK26S2J3QC;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rairai.memoriahTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/memoriah.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/memoriah";
+			};
+			name = Release;
+		};
+		315E4D9D2C35E38500FB99EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MK26S2J3QC;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rairai.memoriahUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = memoriah;
+			};
+			name = Debug;
+		};
+		315E4D9E2C35E38500FB99EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = MK26S2J3QC;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rairai.memoriahUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = memoriah;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		315E4D682C35E38200FB99EC /* Build configuration list for PBXProject "memoriah" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				315E4D942C35E38500FB99EC /* Debug */,
+				315E4D952C35E38500FB99EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		315E4D962C35E38500FB99EC /* Build configuration list for PBXNativeTarget "memoriah" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				315E4D972C35E38500FB99EC /* Debug */,
+				315E4D982C35E38500FB99EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		315E4D992C35E38500FB99EC /* Build configuration list for PBXNativeTarget "memoriahTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				315E4D9A2C35E38500FB99EC /* Debug */,
+				315E4D9B2C35E38500FB99EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		315E4D9C2C35E38500FB99EC /* Build configuration list for PBXNativeTarget "memoriahUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				315E4D9D2C35E38500FB99EC /* Debug */,
+				315E4D9E2C35E38500FB99EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		315E4D7B2C35E38500FB99EC /* memoriah.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				315E4D7C2C35E38500FB99EC /* memoriah.xcdatamodel */,
+			);
+			currentVersion = 315E4D7C2C35E38500FB99EC /* memoriah.xcdatamodel */;
+			path = memoriah.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 315E4D652C35E38200FB99EC /* Project object */;
+}
