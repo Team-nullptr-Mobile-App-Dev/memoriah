@@ -1,19 +1,20 @@
+//  Created by Raidel Almeida on 7/3/24.
 //
 //  memoriahApp.swift
 //  memoriah
 //
-//  Created by Raidel Almeida on 7/3/24.
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct memoriahApp: App {
     let persistenceController = PersistenceController.shared
-
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
