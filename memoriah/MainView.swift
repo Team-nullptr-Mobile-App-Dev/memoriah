@@ -11,21 +11,34 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Image(.brain3)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .phaseAnimator([false, true]) { brain3, chromaRotate in brain3
+                        .scaleEffect(1, anchor: chromaRotate ? .bottom : .topTrailing)
+                        .hueRotation(.degrees(chromaRotate ? 420 : 0))
+                    } animation: { _ in
+                        .easeInOut(duration: 4)
+                    }
+
                 Text("memoriah")
-                    .font(.largeTitle)
+                    .font(.custom("Futura", size: 50))
                     .padding(.bottom, 200)
                     .dynamicTypeSize(.xxxLarge)
 
                 Text("Pick a mode")
                     .font(.headline)
+                    .dynamicTypeSize(.xxxLarge)
                     .padding(.bottom, 20)
 
-                NavigationLink("Practice Mode", destination: GameBoardView(mode: .practice))
+                NavigationLink("👶 Practice Mode", destination: GameBoardView(mode: .practice))
                     .font(.title)
                     .padding(.bottom, 10)
+                    .buttonStyle(.borderedProminent)
 
-                NavigationLink("Timed Mode", destination: GameBoardView(mode: .timed))
+                NavigationLink("⏰ Timed Mode", destination: GameBoardView(mode: .timed))
                     .font(.title)
+                    .buttonStyle(.borderedProminent)
             }
             .navigationBarItems(
                 leading: Button("Leaderboard") {

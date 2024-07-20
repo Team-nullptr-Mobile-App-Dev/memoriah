@@ -14,7 +14,12 @@ struct SettingsView: View {
     var body: some View {
         Form {
             Section(header: Text("Appearance")) {
-                Toggle("Dark Mode", isOn: $isDarkMode)
+                HStack {
+                    Toggle("Dark Mode", isOn: $isDarkMode)
+                    Spacer()
+                    Image(systemName: isDarkMode ? "moon.fill" : "sun.max.fill")
+                        .foregroundColor(isDarkMode ? .yellow : .orange)
+                }
             }
 
             Section(header: Text("Data Management")) {
@@ -34,6 +39,8 @@ struct SettingsView: View {
             }
         }
         .navigationTitle("Settings")
+        .preferredColorScheme(isDarkMode ? .dark : .light)
+
         .alert("Reset Scores", isPresented: $showingResetAlert) {
             Button("Cancel", role: .cancel) {}
             Button("Reset", role: .destructive) {
@@ -81,13 +88,3 @@ struct SettingsView: View {
     }
 }
 
-// MARK: - SettingsView_Previews
-
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            SettingsView()
-        }
-        .modelContainer(for: [User.self, GameSession.self], inMemory: true)
-    }
-}
