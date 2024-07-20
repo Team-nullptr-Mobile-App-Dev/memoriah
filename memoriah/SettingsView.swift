@@ -1,9 +1,7 @@
 //  Created by Raidel Almeida on 7/3/24.
 //
-//  SettingsView.swift
-//  memoriah
-//
-//
+// SettingsView.swift
+// memoriah
 
 import SwiftUI
 import CoreData
@@ -16,35 +14,42 @@ struct SettingsView: View {
     
     var body: some View {
         Form {
-            Toggle("Dark Mode", isOn: $isDarkMode)
-            
-            Button("Reset Scores") {
-                showingResetAlert = true
-            }
-            .alert("Reset Scores", isPresented: $showingResetAlert) {
-                Button("Cancel", role: .cancel) { }
-                Button("Reset", role: .destructive) {
-                    resetScores()
-                }
-            } message: {
-                Text("Are you sure you want to reset all scores? This action cannot be undone.")
+            Section(header: Text("Appearance")) {
+                Toggle("Dark Mode", isOn: $isDarkMode)
             }
             
-            Button("Delete All Information") {
-                showingDeleteAlert = true
-            }
-            .alert("Delete All Information", isPresented: $showingDeleteAlert) {
-                Button("Cancel", role: .cancel) { }
-                Button("Delete", role: .destructive) {
-                    deleteAllInformation()
+            Section(header: Text("Data Management")) {
+                Button("Reset Scores") {
+                    showingResetAlert = true
                 }
-            } message: {
-                Text("Are you sure you want to delete all information? This action cannot be undone.")
+                .foregroundColor(.red)
+                
+                Button("Delete All Information") {
+                    showingDeleteAlert = true
+                }
+                .foregroundColor(.red)
             }
             
             Section(header: Text("App Information")) {
                 Text("Version \(appVersion)")
             }
+        }
+        .navigationTitle("Settings")
+        .alert("Reset Scores", isPresented: $showingResetAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Reset", role: .destructive) {
+                resetScores()
+            }
+        } message: {
+            Text("Are you sure you want to reset all scores? This action cannot be undone.")
+        }
+        .alert("Delete All Information", isPresented: $showingDeleteAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Delete", role: .destructive) {
+                deleteAllInformation()
+            }
+        } message: {
+            Text("Are you sure you want to delete all information? This action cannot be undone.")
         }
     }
     
@@ -82,6 +87,14 @@ struct SettingsView: View {
             try viewContext.save()
         } catch {
             print("Failed to save context after deleting all information: \(error)")
+        }
+    }
+}
+
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            SettingsView()
         }
     }
 }

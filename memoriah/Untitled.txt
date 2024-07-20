@@ -1,4 +1,122 @@
+//  Created by Raidel Almeida on 7/19/24.
+//
+// User.swift
+// memoriah
+//
 
+import Foundation
+import CoreData
+
+@objc(User)
+public class User: NSManagedObject {
+    @NSManaged public var username: String?
+    @NSManaged public var avatar: String?
+    @NSManaged public var gamesPlayed: Int32
+    @NSManaged public var bestTime: Double
+    @NSManaged public var gameSessions: NSSet?
+}
+
+extension User {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<User> {
+        return NSFetchRequest<User>(entityName: "User")
+    }
+    
+    @objc(addGameSessionsObject:)
+    @NSManaged public func addToGameSessions(_ value: GameSession)
+    
+    @objc(removeGameSessionsObject:)
+    @NSManaged public func removeFromGameSessions(_ value: GameSession)
+    
+    @objc(addGameSessions:)
+    @NSManaged public func addToGameSessions(_ values: NSSet)
+    
+    @objc(removeGameSessions:)
+    @NSManaged public func removeFromGameSessions(_ values: NSSet)
+}
+
+
+//
+//  GameSession.swift
+//  memoriah
+//
+//  Created by Raidel Almeida on 7/19/24.
+//
+
+import Foundation
+import CoreData
+
+@objc(GameSession)
+public class GameSession: NSManagedObject {
+    @NSManaged public var id: UUID?
+    @NSManaged public var date: Date?
+    @NSManaged public var score: Int32
+    @NSManaged public var timeElapsed: Double
+    @NSManaged public var mode: String?
+    @NSManaged public var user: User?
+}
+
+extension GameSession {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<GameSession> {
+        return NSFetchRequest<GameSession>(entityName: "GameSession")
+    }
+}
+
+//  Created by Raidel Almeida on 7/3/24.
+//
+// MainView.swift
+// memoriah
+
+import SwiftUI
+import CoreData
+
+struct MainView: View {
+    @State private var showLeaderboard = false
+    @State private var showProfile = false
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                Text("memoriah")
+                    .font(.largeTitle)
+                    .padding(.bottom, 200)
+                    .dynamicTypeSize(.xxxLarge)
+                
+                Text("Pick a mode")
+                    .font(.headline)
+                    .padding(.bottom, 20)
+                
+                NavigationLink("Practice Mode", destination: GameBoardView(mode: .practice))
+                    .font(.title)
+                    .padding(.bottom, 10)
+                
+                NavigationLink("Timed Mode", destination: GameBoardView(mode: .timed))
+                    .font(.title)
+            }
+            .navigationBarItems(
+                leading: Button("Leaderboard") {
+                    showLeaderboard.toggle()
+                },
+                trailing: Button("Profile") {
+                    showProfile.toggle()
+                }
+            )
+            .sheet(isPresented: $showLeaderboard) {
+                LeaderboardView()
+            }
+            .sheet(isPresented: $showProfile) {
+                UserProfileView()
+            }
+        }
+    }
+}
+
+#Preview {
+    MainView()
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+}
+
+
+//  Created by Raidel Almeida on 7/3/24.
 //
 //  memoriahApp.swift
 //  memoriah
@@ -20,63 +138,17 @@ struct memoriahApp: App {
     }
 }
 
+
+//  Created by Raidel Almeida on 7/3/24.
 //
-//  ContentView.swift
-//  memoriah
-//
-//
+// GameBoardView.swift
+// memoriah
 
 import SwiftUI
 import CoreData
-
-struct MainView: View {
-    @State private var showLeaderboard = false
-    @State private var showProfile = false
-    
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Memory Game")
-                    .font(.largeTitle)
-                
-                Text("Pick a mode")
-                    .font(.headline)
-                
-                NavigationLink("Practice Mode", destination: GameBoardView(mode: .practice))
-                NavigationLink("Timed Mode", destination: GameBoardView(mode: .timed))
-            }
-            .navigationBarItems(
-                leading: Button("Leaderboard") { showLeaderboard.toggle() },
-                trailing: Button("Profile") { showProfile.toggle() }
-            )
-        }
-        .sheet(isPresented: $showLeaderboard) {
-            LeaderboardView()
-        }
-        .sheet(isPresented: $showProfile) {
-            UserProfileView()
-        }
-    }
-}
-
-#Preview {
-    MainView()
-}
-
-//
-//  GameBoardView.swift
-//  memoriah
-//
-//
-
-import SwiftUI
-import CoreData
+import UIKit
 
 struct GameBoardView: View {
-    enum GameMode {
-        case practice, timed
-    }
-    
     let mode: GameMode
     @State private var cards: [Card] = []
     @State private var timeElapsed: Double = 0
@@ -85,38 +157,39 @@ struct GameBoardView: View {
     @State private var isGameOver = false
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
+    @State private var activeError: GameError?
     
     let emojis = ["🐶", "🐱", "🐭", "🐹", "🐰"]
     
     var body: some View {
         VStack {
             Text(timerText)
-            
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4)) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2)) {
                 ForEach(Array(cards.enumerated()), id: \.element.id) { index, card in
-                    CardView(card: card, isFlipped: flippedCardIndices.contains(index) || card.isMatched)
-                        .onTapGesture {
-                            withAnimation {
-                                flipCard(at: index)
-                            }
+                    CardView(card: card, isFlipped: flippedCardIndices.contains(index) || card.isMatched) {
+                        withAnimation {
+                            flipCard(at: index)
                         }
+                    }
                 }
             }
         }
         .onAppear(perform: setupGame)
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
-            if !isGameOver {
-                timeElapsed += 1
-                if mode == .timed && timeElapsed >= 60 {
-                    endGame()
-                }
-            }
+            updateTimer()
         }
         .sheet(isPresented: $isGameOver) {
             GameCompletionView(mode: mode, score: score, timeElapsed: timeElapsed) {
                 isGameOver = false
                 setupGame()
             }
+        }
+        .alert(item: $activeError) { error in
+            Alert(
+                title: Text("Error"),
+                message: Text(error.localizedDescription),
+                dismissButton: .default(Text("OK"))
+            )
         }
     }
     
@@ -127,12 +200,7 @@ struct GameBoardView: View {
     }
     
     private func setupGame() {
-        cards = []
-        for emoji in emojis {
-            cards.append(Card(content: emoji))
-            cards.append(Card(content: emoji))
-        }
-        cards.shuffle()
+        cards = emojis.flatMap { [Card(content: $0), Card(content: $0)] }.shuffled()
         timeElapsed = 0
         score = 0
         flippedCardIndices.removeAll()
@@ -145,15 +213,20 @@ struct GameBoardView: View {
             flippedCardIndices.remove(index)
         } else {
             flippedCardIndices.insert(index)
+            playHapticFeedback()
             if flippedCardIndices.count == 2 {
                 checkForMatch()
             }
         }
     }
     
+    private func playHapticFeedback() {
+        let impact = UIImpactFeedbackGenerator(style: .medium)
+        impact.impactOccurred()
+    }
+    
     private func checkForMatch() {
         let flippedCards = flippedCardIndices.map { cards[$0] }
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             if flippedCards[0].content == flippedCards[1].content {
                 for index in flippedCardIndices {
@@ -161,10 +234,17 @@ struct GameBoardView: View {
                 }
                 score += 2
             }
-            
             flippedCardIndices.removeAll()
-            
             if cards.allSatisfy({ $0.isMatched }) {
+                endGame()
+            }
+        }
+    }
+    
+    private func updateTimer() {
+        if !isGameOver {
+            timeElapsed += 1
+            if mode == .timed && timeElapsed >= 60 {
                 endGame()
             }
         }
@@ -177,11 +257,14 @@ struct GameBoardView: View {
     
     private func saveGameSession() {
         guard let user = fetchOrCreateUser() else {
-            print("Error: Unable to fetch or create user")
+            handleError(GameError.failedToFetchUser)
             return
         }
         
-        let newSession = GameSession.create(in: viewContext, score: Int32(score), timeElapsed: timeElapsed, user: user)
+        let newSession = GameSession(context: viewContext)
+        newSession.score = Int32(score)
+        newSession.timeElapsed = timeElapsed
+        newSession.user = user
         newSession.mode = mode == .practice ? "Practice" : "Timed"
         newSession.date = Date()
         newSession.id = UUID()
@@ -195,228 +278,237 @@ struct GameBoardView: View {
             try viewContext.save()
             print("Game session saved successfully!")
         } catch {
-            let nsError = error as NSError
-            print("Error saving game session: \(nsError), \(nsError.userInfo)")
+            handleError(GameError.failedToSaveGame)
+            print("Error saving game session: \(error.localizedDescription)")
         }
     }
     
     private func fetchOrCreateUser() -> User? {
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-        
         do {
             let users = try viewContext.fetch(fetchRequest)
             if let user = users.first {
                 return user
             } else {
-                let newUser = User.create(in: viewContext, username: "Player")
+                let newUser = User(context: viewContext)
+                newUser.username = "Player"
                 newUser.avatar = "😀"
                 newUser.gamesPlayed = 0
                 newUser.bestTime = 0
                 return newUser
             }
         } catch {
+            handleError(GameError.failedToFetchUser)
             print("Error fetching user: \(error)")
             return nil
         }
     }
+    
+    private func handleError(_ error: GameError) {
+        activeError = error
+    }
 }
 
+enum GameMode {
+    case practice, timed
+}
 
-//
-//  GameCompletionView.swift
-//  memoriah
-//
-//
-
-import SwiftUI
-
-struct GameCompletionView: View {
-    let mode: GameBoardView.GameMode
-    let score: Int
-    let timeElapsed: Double
-    let onDismiss: () -> Void
+enum GameError: Error, LocalizedError, Identifiable {
+    case invalidMove
+    case gameOver
+    case failedToSaveGame
+    case failedToFetchUser
     
-    var body: some View {
-        VStack(spacing: 20) {
-            Text("Game Over!")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            
-            Text("Mode: \(mode == .practice ? "Practice" : "Timed")")
-                .font(.title2)
-            
-            Text("Score: \(score)")
-                .font(.title2)
-            
-            Text("Time: \(String(format: "%.2f", timeElapsed)) seconds")
-                .font(.title2)
-            
-            Button("Back to Main Menu") {
-                onDismiss()
-            }
-            .padding()
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(10)
-            .shadow(radius: 5)
-            .padding(.top, 20)
+    var id: String {
+        switch self {
+            case .invalidMove: return "invalidMove"
+            case .gameOver: return "gameOver"
+            case .failedToSaveGame: return "failedToSaveGame"
+            case .failedToFetchUser: return "failedToFetchUser"
         }
-        .padding()
+    }
+    
+    var errorDescription: String? {
+        switch self {
+            case .failedToSaveGame:
+                return "Failed to save the game session. Please try again."
+            case .failedToFetchUser:
+                return "Failed to fetch or create user. Please restart the app."
+            case .invalidMove:
+                return "Invalid move."
+            case .gameOver:
+                return "Game over."
+        }
     }
 }
 
 
-
+//  Created by Raidel Almeida on 7/3/24.
 //
-//  CardView.swift
-//  memoriah
-//
-//
+// LeaderboardView.swift
+// memoriah
 
 import SwiftUI
-
-struct Card: Identifiable {
-    let id = UUID()
-    let content: String
-    var isFaceUp = false
-    var isMatched = false
-}
-
-struct CardView: View {
-    let card: Card
-    let isFlipped: Bool
-    
-    var body: some View {
-        ZStack {
-            if isFlipped {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.white)
-                    .shadow(radius: 3)
-                    .overlay(
-                        Text(card.content)
-                            .font(.largeTitle)
-                    )
-            } else {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.blue)
-                    .shadow(radius: 3)
-            }
-        }
-        .frame(width: 80, height: 120)
-        .rotation3DEffect(
-            .degrees(isFlipped ? 180 : 0),
-            axis: (x: 0, y: 1, z: 0)
-        )
-        .animation(.default, value: isFlipped)
-    }
-}
-
-//
-//  PersistenceController.swift
-//  memoriah
-//
-//
-
 import CoreData
 
-struct PersistenceController {
-    static let shared = PersistenceController()
+struct LeaderboardView: View {
+    @FetchRequest(
+        entity: GameSession.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \GameSession.score, ascending: false)]
+    ) var gameSessions: FetchedResults<GameSession>
     
-    let container: NSPersistentContainer
-    
-    init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "memoriah")
-        if inMemory {
-            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+    var body: some View {
+        List {
+            ForEach(gameSessions) { session in
+                HStack {
+                    Text(session.user?.username ?? "Unknown")
+                    Spacer()
+                    Text("Score: \(session.score)")
+                    Text("Time: \(String(format: "%.2f", session.timeElapsed))")
+                }
+            }
         }
-        container.loadPersistentStores { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+        .navigationTitle("Leaderboard")
+    }
+}
+
+struct LeaderboardView_Previews: PreviewProvider {
+    static var previews: some View {
+        LeaderboardView()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    }
+}
+
+
+//  Created by Raidel Almeida on 7/3/24.
+//
+// UserProfileView.swift
+// memoriah
+
+import SwiftUI
+import CoreData
+
+struct UserProfileView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \User.username, ascending: true)],
+        animation: .default
+    ) private var users: FetchedResults<User>
+    
+    @State private var username: String = ""
+    @State private var selectedAvatar: String = "😀"
+    @State private var showEmojiPicker = false
+    
+    private var currentUser: User? {
+        users.first ?? createUser()
+    }
+    
+    var body: some View {
+        NavigationView {
+            Form {
+                Section(header: Text("Profile")) {
+                    TextField("Username", text: $username)
+                        .onChange(of: username) { newValue in
+                            updateUsername(newValue)
+                        }
+                    
+                    HStack {
+                        Text("Avatar")
+                        Spacer()
+                        Text(selectedAvatar)
+                            .font(.system(size: 40))
+                            .onTapGesture {
+                                showEmojiPicker = true
+                            }
+                    }
+                }
+                
+                Section(header: Text("Statistics")) {
+                    Text("Total Games Played: \(currentUser?.gamesPlayed ?? 0)")
+                    Text("Best Time: \(formatTime(currentUser?.bestTime ?? 0))")
+                }
+                
+                NavigationLink("Settings", destination: SettingsView())
+            }
+            .navigationTitle("User Profile")
+            .onAppear(perform: loadUserData)
+            .sheet(isPresented: $showEmojiPicker) {
+                EmojiPickerView(selectedEmoji: $selectedAvatar)
             }
         }
     }
     
-    static var preview: PersistenceController = {
-        let result = PersistenceController(inMemory: true)
-        let viewContext = result.container.viewContext
-        // Add sample data here if needed
+    private func loadUserData() {
+        username = currentUser?.username ?? ""
+        selectedAvatar = currentUser?.avatar ?? "😀"
+    }
+    
+    private func updateUsername(_ newUsername: String) {
+        currentUser?.username = newUsername
+        saveContext()
+    }
+    
+    private func createUser() -> User? {
+        let newUser = User(context: viewContext)
+        newUser.username = "Player"
+        newUser.avatar = "😀"
+        newUser.gamesPlayed = 0
+        newUser.bestTime = 0
+        
+        do {
+            try viewContext.save()
+            return newUser
+        } catch {
+            print("Failed to create user: \(error)")
+            return nil
+        }
+    }
+    
+    private func saveContext() {
         do {
             try viewContext.save()
         } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            print("Failed to save context: \(error)")
         }
-        return result
-    }()
-}
-
-//
-//  Models.swift
-//  memoriah
-//
-//
-
-import Foundation
-import CoreData
-
-// MARK: - GameSession
-@objc(GameSession)
-public class GameSession: NSManagedObject, Identifiable {
-    @NSManaged public var id: UUID
-    @NSManaged public var score: Int32
-    @NSManaged public var timeElapsed: Double
-    @NSManaged public var user: User?
-    @NSManaged public var mode: String?
-    @NSManaged public var date: Date?
-}
-
-extension GameSession {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<GameSession> {
-        return NSFetchRequest<GameSession>(entityName: "GameSession")
+    }
+    
+    private func formatTime(_ time: Double) -> String {
+        let minutes = Int(time) / 60
+        let seconds = Int(time) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 }
 
-// MARK: - User
-@objc(User)
-public class User: NSManagedObject {
-    @NSManaged public var username: String?
-    @NSManaged public var gameSessions: NSSet?
-    @NSManaged public var avatar: String?
-    @NSManaged public var gamesPlayed: Int32
-    @NSManaged public var bestTime: Double
-}
-
-extension User {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<User> {
-        return NSFetchRequest<User>(entityName: "User")
-    }
-}
-
-// MARK: - Convenience Methods
-extension GameSession {
-    static func create(in context: NSManagedObjectContext, score: Int32, timeElapsed: Double, user: User) -> GameSession {
-        let gameSession = GameSession(context: context)
-        gameSession.score = score
-        gameSession.timeElapsed = timeElapsed
-        gameSession.user = user
-        return gameSession
-    }
-}
-
-extension User {
-    static func create(in context: NSManagedObjectContext, username: String) -> User {
-        let user = User(context: context)
-        user.username = username
-        return user
+struct EmojiPickerView: View {
+    @Binding var selectedEmoji: String
+    @Environment(\.presentationMode) var presentationMode
+    
+    let emojis = ["😀", "😎", "🤓", "🥳", "😺", "🐶", "🦊", "🐸", "🐙", "🦄"]
+    
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 5)) {
+                    ForEach(emojis, id: \.self) { emoji in
+                        Text(emoji)
+                            .font(.system(size: 50))
+                            .onTapGesture {
+                                selectedEmoji = emoji
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                    }
+                }
+            }
+            .navigationTitle("Select Avatar")
+        }
     }
 }
 
 
+//  Created by Raidel Almeida on 7/3/24.
 //
-//  SettingsView.swift
-//  memoriah
-//
-//
+// SettingsView.swift
+// memoriah
 
 import SwiftUI
 import CoreData
@@ -429,35 +521,42 @@ struct SettingsView: View {
     
     var body: some View {
         Form {
-            Toggle("Dark Mode", isOn: $isDarkMode)
-            
-            Button("Reset Scores") {
-                showingResetAlert = true
-            }
-            .alert("Reset Scores", isPresented: $showingResetAlert) {
-                Button("Cancel", role: .cancel) { }
-                Button("Reset", role: .destructive) {
-                    resetScores()
-                }
-            } message: {
-                Text("Are you sure you want to reset all scores? This action cannot be undone.")
+            Section(header: Text("Appearance")) {
+                Toggle("Dark Mode", isOn: $isDarkMode)
             }
             
-            Button("Delete All Information") {
-                showingDeleteAlert = true
-            }
-            .alert("Delete All Information", isPresented: $showingDeleteAlert) {
-                Button("Cancel", role: .cancel) { }
-                Button("Delete", role: .destructive) {
-                    deleteAllInformation()
+            Section(header: Text("Data Management")) {
+                Button("Reset Scores") {
+                    showingResetAlert = true
                 }
-            } message: {
-                Text("Are you sure you want to delete all information? This action cannot be undone.")
+                .foregroundColor(.red)
+                
+                Button("Delete All Information") {
+                    showingDeleteAlert = true
+                }
+                .foregroundColor(.red)
             }
             
             Section(header: Text("App Information")) {
                 Text("Version \(appVersion)")
             }
+        }
+        .navigationTitle("Settings")
+        .alert("Reset Scores", isPresented: $showingResetAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Reset", role: .destructive) {
+                resetScores()
+            }
+        } message: {
+            Text("Are you sure you want to reset all scores? This action cannot be undone.")
+        }
+        .alert("Delete All Information", isPresented: $showingDeleteAlert) {
+            Button("Cancel", role: .cancel) { }
+            Button("Delete", role: .destructive) {
+                deleteAllInformation()
+            }
+        } message: {
+            Text("Are you sure you want to delete all information? This action cannot be undone.")
         }
     }
     
@@ -499,93 +598,53 @@ struct SettingsView: View {
     }
 }
 
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            SettingsView()
+        }
+    }
+}
 
+//  Created by Raidel Almeida on 7/3/24.
 //
-//  UserProfileView.swift
-//  memoriah
-//
-//
+// GameCompletionView.swift
+// memoriah
 
 import SwiftUI
-import CoreData
 
-struct UserProfileView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \User.username, ascending: true)],
-        animation: .default)
-    private var users: FetchedResults<User>
-    
-    @State private var username: String = ""
-    @State private var selectedAvatar: String = "😀"
-    @State private var showEmojiPicker = false
-    
-    private var currentUser: User? {
-        users.first ?? createUser()
-    }
+struct GameCompletionView: View {
+    let mode: GameBoardView.GameMode
+    let score: Int
+    let timeElapsed: Double
+    let onDismiss: () -> Void
     
     var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("Profile")) {
-                    TextField("Username", text: $username)
-                        .onChange(of: username) { newValue in
-                            updateUsername(newValue)
-                        }
-                    
-                    HStack {
-                        Text("Avatar")
-                        Spacer()
-                        Text(selectedAvatar)
-                            .font(.system(size: 40))
-                            .onTapGesture {
-                                showEmojiPicker = true
-                            }
-                    }
-                }
-                
-                Section(header: Text("Statistics")) {
-                    Text("Total Games Played: \(currentUser?.gamesPlayed ?? 0)")
-                    Text("Best Time: \(formatTime(currentUser?.bestTime ?? 0))")
-                }
-                
-                NavigationLink("Settings", destination: SettingsView())
+        VStack(spacing: 20) {
+            Text("Game Over!")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+            
+            Text("Mode: \(mode == .practice ? "Practice" : "Timed")")
+                .font(.title2)
+            
+            Text("Score: \(score)")
+                .font(.title2)
+            
+            Text("Time: \(formatTime(timeElapsed))")
+                .font(.title2)
+            
+            Button("Back to Main Menu") {
+                onDismiss()
             }
-            .navigationTitle("User Profile")
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .shadow(radius: 5)
+            .padding(.top, 20)
         }
-        .onAppear(perform: loadUserData)
-        .sheet(isPresented: $showEmojiPicker) {
-            EmojiPickerView(selectedEmoji: $selectedAvatar)
-        }
-    }
-    
-    private func loadUserData() {
-        username = currentUser?.username ?? ""
-        selectedAvatar = currentUser?.avatar ?? "😀"
-    }
-    
-    private func updateUsername(_ newUsername: String) {
-        currentUser?.username = newUsername
-        saveContext()
-    }
-    
-    private func createUser() -> User {
-        let newUser = User(context: viewContext)
-        newUser.username = "Player"
-        newUser.avatar = "😀"
-        newUser.gamesPlayed = 0
-        newUser.bestTime = 0
-        saveContext()
-        return newUser
-    }
-    
-    private func saveContext() {
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+        .padding()
     }
     
     private func formatTime(_ time: Double) -> String {
@@ -595,62 +654,112 @@ struct UserProfileView: View {
     }
 }
 
-struct EmojiPickerView: View {
-    @Binding var selectedEmoji: String
-    @Environment(\.presentationMode) var presentationMode
-    
-    let emojis = ["😀", "😎", "🤓", "🥳", "😺", "🐶", "🦊", "🐸", "🐙", "🦄"]
-    
-    var body: some View {
-        NavigationView {
-            ScrollView {
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 5)) {
-                    ForEach(emojis, id: \.self) { emoji in
-                        Text(emoji)
-                            .font(.system(size: 50))
-                            .onTapGesture {
-                                selectedEmoji = emoji
-                                presentationMode.wrappedValue.dismiss()
-                            }
-                    }
-                }
-            }
-            .navigationTitle("Select Avatar")
-        }
+struct GameCompletionView_Previews: PreviewProvider {
+    static var previews: some View {
+        GameCompletionView(mode: .practice, score: 100, timeElapsed: 75.5) {}
     }
 }
 
+
+//  Created by Raidel Almeida on 7/3/24.
 //
-//  LeaderboardView.swift
+//  CardView.swift
 //  memoriah
 //
 //
 
 import SwiftUI
-import CoreData
 
-struct LeaderboardView: View {
-    @FetchRequest(
-        entity: GameSession.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \GameSession.score, ascending: false)]
-    ) var gameSessions: FetchedResults<GameSession>
+struct CardView: View {
+    
+    let card: Card
+    let isFlipped: Bool
+    let onTap: () -> Void
+    
     
     var body: some View {
-        List {
-            ForEach(gameSessions) { session in
-                HStack {
-                    Text(session.user?.username ?? "Unknown")
-                    Spacer()
-                    Text("Score: \(session.score)")
-                    Text("Time: \(String(format: "%.2f", session.timeElapsed))")
-                }
+        ZStack {
+            if isFlipped {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.white)
+                    .shadow(radius: 3)
+                    .overlay(
+                        Text(card.content)
+                            .font(.largeTitle)
+                    )
+            } else {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.blue)
+                    .shadow(radius: 3)
             }
+        }
+        .frame(width: 80, height: 80)
+        .rotation3DEffect(
+            .degrees(isFlipped ? 180 : 0),
+            axis: (x: 0, y: 1, z: 0)
+        )
+        .animation(.default, value: isFlipped)
+        .onTapGesture {
+            onTap()
         }
     }
 }
 
-struct LeaderboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        LeaderboardView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+
+//  Created by Raidel Almeida on 7/4/24.
+//
+//  Persistence.swift
+//  memoriah
+//
+//
+
+    // Persistence.swift
+
+import CoreData
+import CoreTransferable
+
+struct PersistenceController {
+    static let shared = PersistenceController()
+    
+    let container: NSPersistentContainer
+    
+    init(inMemory: Bool = false) {
+        container = NSPersistentContainer(name: "memoriah")
+        if inMemory {
+            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        }
+        container.loadPersistentStores { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        }
+        container.viewContext.automaticallyMergesChangesFromParent = true
     }
+    
+    static var preview: PersistenceController = {
+        let result = PersistenceController(inMemory: true)
+        let viewContext = result.container.viewContext
+        for _ in 0..<10 {
+            let newSession = GameSession(context: viewContext)
+            newSession.date = Date()
+            newSession.id = UUID()
+            newSession.score = Int32.random(in: 0...100)
+            newSession.timeElapsed = Double.random(in: 0...300)
+            newSession.mode = "Classic"
+            
+            let newUser = User(context: viewContext)
+            newUser.username = "User\(Int.random(in: 1...1000))"
+            newUser.avatar = "default_avatar"
+            newUser.gamesPlayed = 1
+            newUser.bestTime = newSession.timeElapsed
+            newSession.user = newUser
+        }
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        return result
+    }()
 }

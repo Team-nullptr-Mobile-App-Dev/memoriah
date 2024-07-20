@@ -7,16 +7,12 @@
 
 import SwiftUI
 
-struct Card: Identifiable {
-    let id = UUID()
-    let content: String
-    var isFaceUp = false
-    var isMatched = false
-}
-
 struct CardView: View {
+    
     let card: Card
     let isFlipped: Bool
+    let onTap: () -> Void
+    
     
     var body: some View {
         ZStack {
@@ -40,5 +36,15 @@ struct CardView: View {
             axis: (x: 0, y: 1, z: 0)
         )
         .animation(.default, value: isFlipped)
+        .onTapGesture {
+            onTap()
+        }
     }
+}
+
+struct Card: Identifiable {
+    let id = UUID()
+    let content: String
+    var isFaceUp = false
+    var isMatched = false
 }

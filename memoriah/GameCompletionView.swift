@@ -1,14 +1,12 @@
 //  Created by Raidel Almeida on 7/3/24.
 //
-//  GameCompletionView.swift
-//  memoriah
-//
-//
+// GameCompletionView.swift
+// memoriah
 
 import SwiftUI
 
 struct GameCompletionView: View {
-    let mode: GameBoardView.GameMode
+    let mode: GameMode
     let score: Int
     let timeElapsed: Double
     let onDismiss: () -> Void
@@ -25,7 +23,7 @@ struct GameCompletionView: View {
             Text("Score: \(score)")
                 .font(.title2)
             
-            Text("Time: \(String(format: "%.2f", timeElapsed)) seconds")
+            Text("Time: \(formatTime(timeElapsed))")
                 .font(.title2)
             
             Button("Back to Main Menu") {
@@ -39,5 +37,17 @@ struct GameCompletionView: View {
             .padding(.top, 20)
         }
         .padding()
+    }
+    
+    private func formatTime(_ time: Double) -> String {
+        let minutes = Int(time) / 60
+        let seconds = Int(time) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+}
+
+struct GameCompletionView_Previews: PreviewProvider {
+    static var previews: some View {
+        GameCompletionView(mode: .practice, score: 100, timeElapsed: 75.5) {}
     }
 }

@@ -1,9 +1,7 @@
 //  Created by Raidel Almeida on 7/3/24.
 //
-//  LeaderboardView.swift
-//  memoriah
-//
-//
+// LeaderboardView.swift
+// memoriah
 
 import SwiftUI
 import CoreData
@@ -16,7 +14,7 @@ struct LeaderboardView: View {
     
     var body: some View {
         List {
-            ForEach(gameSessions) { session in
+            ForEach(gameSessions, id: \.id) { session in
                 HStack {
                     Text(session.user?.username ?? "Unknown")
                     Spacer()
@@ -25,11 +23,13 @@ struct LeaderboardView: View {
                 }
             }
         }
+        .navigationTitle("Leaderboard")
     }
 }
 
 struct LeaderboardView_Previews: PreviewProvider {
     static var previews: some View {
-        LeaderboardView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        LeaderboardView()
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
