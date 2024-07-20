@@ -7,13 +7,13 @@
 
 import SwiftUI
 
+// MARK: - CardView
+
 struct CardView: View {
-    
     let card: Card
     let isFlipped: Bool
     let onTap: () -> Void
-    
-    
+
     var body: some View {
         ZStack {
             if isFlipped {
@@ -41,6 +41,8 @@ struct CardView: View {
         }
     }
 }
+
+// MARK: - Card
 
 struct Card: Identifiable {
     let id = UUID()

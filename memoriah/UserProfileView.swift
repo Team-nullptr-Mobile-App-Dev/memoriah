@@ -3,33 +3,23 @@
 // UserProfileView.swift
 // memoriah
 
+import SwiftData
 import SwiftUI
-import CoreData
+
+// MARK: - UserProfileView
 
 struct UserProfileView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \User.username, ascending: true)],
-        animation: .default
-    ) private var users: FetchedResults<User>
-    
-    @State private var username: String = ""
-    @State private var selectedAvatar: String = "😀"
-    @State private var showEmojiPicker = false
-    
-    private var currentUser: User? {
-        users.first ?? createUser()
-    }
-    
+    // MARK: Internal
+
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Profile")) {
                     TextField("Username", text: $username)
-                        .onChange(of: username) { newValue in
-                            updateUsername(newValue)
+                        .onChange(of: username) { newUsername in
+                            updateUsername(newUsername)
                         }
-                    
+
                     HStack {
                         Text("Avatar")
                         Spacer()
@@ -40,12 +30,12 @@ struct UserProfileView: View {
                             }
                     }
                 }
-                
+
                 Section(header: Text("Statistics")) {
                     Text("Total Games Played: \(currentUser?.gamesPlayed ?? 0)")
                     Text("Best Time: \(formatTime(currentUser?.bestTime ?? 0))")
                 }
-                
+
                 NavigationLink("Settings", destination: SettingsView())
             }
             .navigationTitle("User Profile")
@@ -55,41 +45,34 @@ struct UserProfileView: View {
             }
         }
     }
-    
+
+    // MARK: Private
+
+    @Query private var users: [User]
+    @Environment(\.modelContext) private var modelContext
+    @State private var username: String = ""
+    @State private var selectedAvatar: String = "😀"
+    @State private var showEmojiPicker = false
+
+    private var currentUser: User? {
+        users.first ?? createUser()
+    }
+
     private func loadUserData() {
-        username = currentUser?.username ?? ""
+        username = currentUser?.userName ?? ""
         selectedAvatar = currentUser?.avatar ?? "😀"
     }
-    
+
     private func updateUsername(_ newUsername: String) {
-        currentUser?.username = newUsername
-        saveContext()
+        currentUser?.userName = newUsername
     }
-    
+
     private func createUser() -> User? {
-        let newUser = User(context: viewContext)
-        newUser.username = "Player"
-        newUser.avatar = "😀"
-        newUser.gamesPlayed = 0
-        newUser.bestTime = 0
-        
-        do {
-            try viewContext.save()
-            return newUser
-        } catch {
-            print("Failed to create user: \(error)")
-            return nil
-        }
+        let newUser = User(avatar: "😀", bestTime: 0, gamesPlayed: 0, userName: "Player")
+        modelContext.insert(newUser)
+        return newUser
     }
-    
-    private func saveContext() {
-        do {
-            try viewContext.save()
-        } catch {
-            print("Failed to save context: \(error)")
-        }
-    }
-    
+
     private func formatTime(_ time: Double) -> String {
         let minutes = Int(time) / 60
         let seconds = Int(time) % 60
@@ -97,12 +80,14 @@ struct UserProfileView: View {
     }
 }
 
+// MARK: - EmojiPickerView
+
 struct EmojiPickerView: View {
     @Binding var selectedEmoji: String
-    @Environment(\.presentationMode) var presentationMode
-    
+    @Environment(\.dismiss) var dismiss
+
     let emojis = ["😀", "😎", "🤓", "🥳", "😺", "🐶", "🦊", "🐸", "🐙", "🦄"]
-    
+
     var body: some View {
         NavigationView {
             ScrollView {
@@ -112,12 +97,21 @@ struct EmojiPickerView: View {
                             .font(.system(size: 50))
                             .onTapGesture {
                                 selectedEmoji = emoji
-                                presentationMode.wrappedValue.dismiss()
+                                dismiss()
                             }
                     }
                 }
             }
             .navigationTitle("Select Avatar")
         }
+    }
+}
+
+// MARK: - UserProfileView_Previews
+
+struct UserProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        UserProfileView()
+            .modelContainer(for: [User.self], inMemory: true)
     }
 }

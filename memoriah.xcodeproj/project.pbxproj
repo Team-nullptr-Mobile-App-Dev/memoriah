@@ -7,25 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3132CBDC2C4B48CB00B38AA3 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3132CBDA2C4B48CB00B38AA3 /* DataModel.xcdatamodeld */; };
-		3132CBE12C4B4ABE00B38AA3 /* GameSession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3132CBDD2C4B4ABE00B38AA3 /* GameSession+CoreDataClass.swift */; };
-		3132CBE22C4B4ABE00B38AA3 /* GameSession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3132CBDE2C4B4ABE00B38AA3 /* GameSession+CoreDataProperties.swift */; };
-		3132CBE32C4B4ABE00B38AA3 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3132CBDF2C4B4ABE00B38AA3 /* User+CoreDataClass.swift */; };
-		3132CBE42C4B4ABE00B38AA3 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3132CBE02C4B4ABE00B38AA3 /* User+CoreDataProperties.swift */; };
+		314FB6B82C4C022000094371 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314FB6B72C4C022000094371 /* DataModels.swift */; };
 		315E4D712C35E38300FB99EC /* memoriahApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4D702C35E38300FB99EC /* memoriahApp.swift */; };
 		315E4D732C35E38300FB99EC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4D722C35E38300FB99EC /* MainView.swift */; };
 		315E4D752C35E38500FB99EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 315E4D742C35E38500FB99EC /* Assets.xcassets */; };
 		315E4D782C35E38500FB99EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 315E4D772C35E38500FB99EC /* Preview Assets.xcassets */; };
-		315E4D872C35E38500FB99EC /* memoriahTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4D862C35E38500FB99EC /* memoriahTests.swift */; };
-		315E4D912C35E38500FB99EC /* memoriahUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4D902C35E38500FB99EC /* memoriahUITests.swift */; };
-		315E4D932C35E38500FB99EC /* memoriahUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4D922C35E38500FB99EC /* memoriahUITestsLaunchTests.swift */; };
 		315E4DA12C35EF2F00FB99EC /* GameBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4DA02C35EF2600FB99EC /* GameBoardView.swift */; };
 		315E4DA32C35EF6600FB99EC /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4DA22C35EF5700FB99EC /* LeaderboardView.swift */; };
 		315E4DA52C35EFAD00FB99EC /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4DA42C35EFA100FB99EC /* UserProfileView.swift */; };
 		315E4DA72C35EFC100FB99EC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4DA62C35EFB900FB99EC /* SettingsView.swift */; };
 		315E4DA92C35F43D00FB99EC /* GameCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4DA82C35F43400FB99EC /* GameCompletionView.swift */; };
 		315E4DAB2C35F56900FB99EC /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4DAA2C35F55600FB99EC /* CardView.swift */; };
-		317D76B02C375E62005A9C31 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D76AF2C375E4A005A9C31 /* Persistence.swift */; };
+		317D2F762C4C294B007F1369 /* TODO.md in Resources */ = {isa = PBXBuildFile; fileRef = 317D2F752C4C294B007F1369 /* TODO.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,28 +39,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3132CBDB2C4B48CB00B38AA3 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
-		3132CBDD2C4B4ABE00B38AA3 /* GameSession+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameSession+CoreDataClass.swift"; sourceTree = "<group>"; };
-		3132CBDE2C4B4ABE00B38AA3 /* GameSession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameSession+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		3132CBDF2C4B4ABE00B38AA3 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		3132CBE02C4B4ABE00B38AA3 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		314FB6B72C4C022000094371 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
 		315E4D6D2C35E38300FB99EC /* memoriah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = memoriah.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		315E4D702C35E38300FB99EC /* memoriahApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memoriahApp.swift; sourceTree = "<group>"; };
 		315E4D722C35E38300FB99EC /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		315E4D742C35E38500FB99EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		315E4D772C35E38500FB99EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		315E4D822C35E38500FB99EC /* memoriahTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = memoriahTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		315E4D862C35E38500FB99EC /* memoriahTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memoriahTests.swift; sourceTree = "<group>"; };
 		315E4D8C2C35E38500FB99EC /* memoriahUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = memoriahUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		315E4D902C35E38500FB99EC /* memoriahUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memoriahUITests.swift; sourceTree = "<group>"; };
-		315E4D922C35E38500FB99EC /* memoriahUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memoriahUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		315E4DA02C35EF2600FB99EC /* GameBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardView.swift; sourceTree = "<group>"; };
 		315E4DA22C35EF5700FB99EC /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		315E4DA42C35EFA100FB99EC /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		315E4DA62C35EFB900FB99EC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		315E4DA82C35F43400FB99EC /* GameCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCompletionView.swift; sourceTree = "<group>"; };
 		315E4DAA2C35F55600FB99EC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		317D76AF2C375E4A005A9C31 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		317D2F752C4C294B007F1369 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +85,6 @@
 			isa = PBXGroup;
 			children = (
 				315E4D6F2C35E38300FB99EC /* memoriah */,
-				315E4D852C35E38500FB99EC /* memoriahTests */,
-				315E4D8F2C35E38500FB99EC /* memoriahUITests */,
 				315E4D6E2C35E38300FB99EC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -118,7 +102,6 @@
 		315E4D6F2C35E38300FB99EC /* memoriah */ = {
 			isa = PBXGroup;
 			children = (
-				317D76AF2C375E4A005A9C31 /* Persistence.swift */,
 				315E4DAA2C35F55600FB99EC /* CardView.swift */,
 				315E4DA82C35F43400FB99EC /* GameCompletionView.swift */,
 				315E4DA62C35EFB900FB99EC /* SettingsView.swift */,
@@ -127,13 +110,10 @@
 				315E4DA02C35EF2600FB99EC /* GameBoardView.swift */,
 				315E4D702C35E38300FB99EC /* memoriahApp.swift */,
 				315E4D722C35E38300FB99EC /* MainView.swift */,
+				317D2F752C4C294B007F1369 /* TODO.md */,
+				314FB6B72C4C022000094371 /* DataModels.swift */,
 				315E4D742C35E38500FB99EC /* Assets.xcassets */,
 				315E4D762C35E38500FB99EC /* Preview Content */,
-				3132CBDA2C4B48CB00B38AA3 /* DataModel.xcdatamodeld */,
-				3132CBDD2C4B4ABE00B38AA3 /* GameSession+CoreDataClass.swift */,
-				3132CBDE2C4B4ABE00B38AA3 /* GameSession+CoreDataProperties.swift */,
-				3132CBDF2C4B4ABE00B38AA3 /* User+CoreDataClass.swift */,
-				3132CBE02C4B4ABE00B38AA3 /* User+CoreDataProperties.swift */,
 			);
 			path = memoriah;
 			sourceTree = "<group>";
@@ -144,23 +124,6 @@
 				315E4D772C35E38500FB99EC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		315E4D852C35E38500FB99EC /* memoriahTests */ = {
-			isa = PBXGroup;
-			children = (
-				315E4D862C35E38500FB99EC /* memoriahTests.swift */,
-			);
-			path = memoriahTests;
-			sourceTree = "<group>";
-		};
-		315E4D8F2C35E38500FB99EC /* memoriahUITests */ = {
-			isa = PBXGroup;
-			children = (
-				315E4D902C35E38500FB99EC /* memoriahUITests.swift */,
-				315E4D922C35E38500FB99EC /* memoriahUITestsLaunchTests.swift */,
-			);
-			path = memoriahUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +230,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				317D2F762C4C294B007F1369 /* TODO.md in Resources */,
 				315E4D782C35E38500FB99EC /* Preview Assets.xcassets in Resources */,
 				315E4D752C35E38500FB99EC /* Assets.xcassets in Resources */,
 			);
@@ -293,18 +257,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				314FB6B82C4C022000094371 /* DataModels.swift in Sources */,
 				315E4DA52C35EFAD00FB99EC /* UserProfileView.swift in Sources */,
 				315E4DAB2C35F56900FB99EC /* CardView.swift in Sources */,
 				315E4DA72C35EFC100FB99EC /* SettingsView.swift in Sources */,
-				317D76B02C375E62005A9C31 /* Persistence.swift in Sources */,
 				315E4DA92C35F43D00FB99EC /* GameCompletionView.swift in Sources */,
 				315E4DA12C35EF2F00FB99EC /* GameBoardView.swift in Sources */,
 				315E4D732C35E38300FB99EC /* MainView.swift in Sources */,
-				3132CBE12C4B4ABE00B38AA3 /* GameSession+CoreDataClass.swift in Sources */,
-				3132CBE22C4B4ABE00B38AA3 /* GameSession+CoreDataProperties.swift in Sources */,
-				3132CBE32C4B4ABE00B38AA3 /* User+CoreDataClass.swift in Sources */,
-				3132CBE42C4B4ABE00B38AA3 /* User+CoreDataProperties.swift in Sources */,
-				3132CBDC2C4B48CB00B38AA3 /* DataModel.xcdatamodeld in Sources */,
 				315E4D712C35E38300FB99EC /* memoriahApp.swift in Sources */,
 				315E4DA32C35EF6600FB99EC /* LeaderboardView.swift in Sources */,
 			);
@@ -314,7 +273,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				315E4D872C35E38500FB99EC /* memoriahTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,8 +280,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				315E4D932C35E38500FB99EC /* memoriahUITestsLaunchTests.swift in Sources */,
-				315E4D912C35E38500FB99EC /* memoriahUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,7 +435,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -510,7 +466,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -636,19 +592,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		3132CBDA2C4B48CB00B38AA3 /* DataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				3132CBDB2C4B48CB00B38AA3 /* DataModel.xcdatamodel */,
-			);
-			currentVersion = 3132CBDB2C4B48CB00B38AA3 /* DataModel.xcdatamodel */;
-			path = DataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 315E4D652C35E38200FB99EC /* Project object */;
 }

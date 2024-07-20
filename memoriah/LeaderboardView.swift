@@ -3,20 +3,19 @@
 // LeaderboardView.swift
 // memoriah
 
+import SwiftData
 import SwiftUI
-import CoreData
+
+// MARK: - LeaderboardView
 
 struct LeaderboardView: View {
-    @FetchRequest(
-        entity: GameSession.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \GameSession.score, ascending: false)]
-    ) var gameSessions: FetchedResults<GameSession>
-    
+    // MARK: Internal
+
     var body: some View {
         List {
-            ForEach(gameSessions, id: \.id) { session in
+            ForEach(gameSessions) { session in
                 HStack {
-                    Text(session.user?.username ?? "Unknown")
+                    Text(session.user?.userName ?? "Unknown")
                     Spacer()
                     Text("Score: \(session.score)")
                     Text("Time: \(String(format: "%.2f", session.timeElapsed))")
@@ -25,11 +24,13 @@ struct LeaderboardView: View {
         }
         .navigationTitle("Leaderboard")
     }
+
+    // MARK: Private
+
+    @Query(sort: \GameSession.score, order: .reverse) private var gameSessions: [GameSession]
 }
 
-struct LeaderboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        LeaderboardView()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
+#Preview {
+    LeaderboardView()
+        .modelContainer(for: [User.self, GameSession.self], inMemory: true)
 }

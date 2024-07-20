@@ -4,12 +4,10 @@
 // memoriah
 
 import SwiftUI
-import CoreData
 
 struct MainView: View {
-    @State private var showLeaderboard = false
-    @State private var showProfile = false
-    
+    // MARK: Internal
+
     var body: some View {
         NavigationView {
             VStack {
@@ -17,15 +15,15 @@ struct MainView: View {
                     .font(.largeTitle)
                     .padding(.bottom, 200)
                     .dynamicTypeSize(.xxxLarge)
-                
+
                 Text("Pick a mode")
                     .font(.headline)
                     .padding(.bottom, 20)
-                
+
                 NavigationLink("Practice Mode", destination: GameBoardView(mode: .practice))
                     .font(.title)
                     .padding(.bottom, 10)
-                
+
                 NavigationLink("Timed Mode", destination: GameBoardView(mode: .timed))
                     .font(.title)
             }
@@ -45,9 +43,13 @@ struct MainView: View {
             }
         }
     }
+
+    // MARK: Private
+
+    @State private var showLeaderboard = false
+    @State private var showProfile = false
 }
 
 #Preview {
     MainView()
-        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }
