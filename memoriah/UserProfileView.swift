@@ -1,123 +1,93 @@
 //  Created by Raidel Almeida on 7/3/24.
 //
-//  UserProfileView.swift
-//  memoriah
-//
-//
+// UserProfileView.swift
+// memoriah
 
+import SwiftData
 import SwiftUI
-import CoreData
+
+// MARK: - UserProfileView
 
 struct UserProfileView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \User.username, ascending: true)],
-        animation: .default)
-    private var users: FetchedResults<User>
-    
-    @State private var username: String = ""
-    @State private var selectedAvatar: String = "😀"
-    @State private var showEmojiPicker = false
-    
-    private var currentUser: User? {
-        print("Fetching current user")
-        let user = users.first ?? createUser()
-        print("Current user: \(user?.username ?? "nil")")
-        return user
-    }
-    
+    // MARK: Internal
+
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Profile")) {
                     TextField("Username", text: $username)
-                        .onChange(of: username) { newValue in
-                            print("Username changed to: \(newValue)")
-                            updateUsername(newValue)
+                        .onChange(of: username) { newUsername in
+                            updateUsername(newUsername)
                         }
-                    
+
                     HStack {
                         Text("Avatar")
                         Spacer()
                         Text(selectedAvatar)
                             .font(.system(size: 40))
                             .onTapGesture {
-                                print("Avatar tapped, showing emoji picker")
                                 showEmojiPicker = true
                             }
                     }
                 }
-                
+
                 Section(header: Text("Statistics")) {
                     Text("Total Games Played: \(currentUser?.gamesPlayed ?? 0)")
                     Text("Best Time: \(formatTime(currentUser?.bestTime ?? 0))")
                 }
-                
+
                 NavigationLink("Settings", destination: SettingsView())
             }
             .navigationTitle("User Profile")
-        }
-        .onAppear(perform: loadUserData)
-        .sheet(isPresented: $showEmojiPicker) {
-            EmojiPickerView(selectedEmoji: $selectedAvatar)
+            .onAppear(perform: loadUserData)
+            .sheet(isPresented: $showEmojiPicker) {
+                EmojiPickerView(selectedEmoji: $selectedAvatar)
+            }
         }
     }
-    
+
+    // MARK: Private
+
+    @Query private var users: [User]
+    @Environment(\.modelContext) private var modelContext
+    @State private var username: String = ""
+    @State private var selectedAvatar: String = "😀"
+    @State private var showEmojiPicker = false
+
+    private var currentUser: User? {
+        users.first ?? createUser()
+    }
+
     private func loadUserData() {
-        print("Loading user data")
-        username = currentUser?.username ?? ""
+        username = currentUser?.userName ?? ""
         selectedAvatar = currentUser?.avatar ?? "😀"
-        print("Loaded username: \(username), avatar: \(selectedAvatar)")
     }
-    
+
     private func updateUsername(_ newUsername: String) {
-        print("Updating username to: \(newUsername)")
-        currentUser?.username = newUsername
-        saveContext()
+        currentUser?.userName = newUsername
     }
-    
+
     private func createUser() -> User? {
-        print("Creating new user")
-        let newUser = User(context: viewContext)
-        newUser.username = "Player"
-        newUser.avatar = "😀"
-        newUser.gamesPlayed = 0
-        newUser.bestTime = 0
-        do {
-            try viewContext.save()
-            print("New user created successfully")
-            return newUser
-        } catch {
-            print("Failed to create user: \(error)")
-            return nil
-        }
+        let newUser = User(avatar: "😀", bestTime: 0, gamesPlayed: 0, userName: "Player")
+        modelContext.insert(newUser)
+        return newUser
     }
-    
-    private func saveContext() {
-        print("Saving context")
-        do {
-            try viewContext.save()
-            print("Context saved successfully")
-        } catch {
-            print("Failed to save context: \(error)")
-        }
-    }
-    
+
     private func formatTime(_ time: Double) -> String {
         let minutes = Int(time) / 60
         let seconds = Int(time) % 60
-        let formattedTime = String(format: "%02d:%02d", minutes, seconds)
-        print("Formatting time: \(time) to \(formattedTime)")
-        return formattedTime
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 }
 
+// MARK: - EmojiPickerView
+
 struct EmojiPickerView: View {
     @Binding var selectedEmoji: String
-    @Environment(\.presentationMode) var presentationMode
-    
+    @Environment(\.dismiss) var dismiss
+
     let emojis = ["😀", "😎", "🤓", "🥳", "😺", "🐶", "🦊", "🐸", "🐙", "🦄"]
-    
+
     var body: some View {
         NavigationView {
             ScrollView {
@@ -126,14 +96,22 @@ struct EmojiPickerView: View {
                         Text(emoji)
                             .font(.system(size: 50))
                             .onTapGesture {
-                                print("Emoji selected: \(emoji)")
                                 selectedEmoji = emoji
-                                presentationMode.wrappedValue.dismiss()
+                                dismiss()
                             }
                     }
                 }
             }
             .navigationTitle("Select Avatar")
         }
+    }
+}
+
+// MARK: - UserProfileView_Previews
+
+struct UserProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        UserProfileView()
+            .modelContainer(for: [User.self], inMemory: true)
     }
 }
