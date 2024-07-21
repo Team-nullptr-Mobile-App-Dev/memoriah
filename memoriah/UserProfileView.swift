@@ -14,21 +14,25 @@ struct UserProfileView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Profile")) {
-                    TextField("Username", text: $username)
-                        .onChange(of: username) { newUsername in
-                            updateUsername(newUsername)
-                        }
-
+                Section {
                     HStack {
-                        Text("Avatar")
                         Spacer()
-                        Text(selectedAvatar)
-                            .font(.system(size: 40))
-                            .onTapGesture {
-                                showEmojiPicker = true
-                            }
+                        VStack {
+                            Text(selectedAvatar)
+                                .font(.system(size: 90))
+                                .onTapGesture {
+                                    showEmojiPicker = true
+                                }
+
+                            Text("Select Avatar")
+                                .foregroundColor(.secondary)
+                        }
+                        Spacer()
                     }
+                    TextField("Username", text: $username)
+                        .onChange(of: username) {
+                            updateUsername(username)
+                        }
                 }
 
                 Section(header: Text("Statistics")) {
@@ -36,9 +40,22 @@ struct UserProfileView: View {
                     Text("Best Time: \(formatTime(currentUser?.bestTime ?? 0))")
                 }
 
-                NavigationLink("Settings", destination: SettingsView())
+//                NavigationLink("Settings", destination: SettingsView())
             }
-            .navigationTitle("User Profile")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Text("User Profile")
+                        .font(.title)
+                        .fontWeight(.bold)
+                }
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: SettingsView()) {
+                        Image(systemName: "gearshape.fill")
+                            .foregroundColor(.accentColor)
+                    }
+                }
+            }
             .onAppear(perform: loadUserData)
             .sheet(isPresented: $showEmojiPicker) {
                 EmojiPickerView(selectedEmoji: $selectedAvatar)
@@ -51,8 +68,9 @@ struct UserProfileView: View {
     @Query private var users: [User]
     @Environment(\.modelContext) private var modelContext
     @State private var username: String = ""
-    @State private var selectedAvatar: String = "😀"
+    @State private var selectedAvatar: String = ""
     @State private var showEmojiPicker = false
+    @State private var showSettings = false
 
     private var currentUser: User? {
         users.first ?? createUser()
@@ -60,7 +78,7 @@ struct UserProfileView: View {
 
     private func loadUserData() {
         username = currentUser?.userName ?? ""
-        selectedAvatar = currentUser?.avatar ?? "😀"
+        selectedAvatar = currentUser?.avatar ?? ""
     }
 
     private func updateUsername(_ newUsername: String) {
@@ -68,7 +86,7 @@ struct UserProfileView: View {
     }
 
     private func createUser() -> User? {
-        let newUser = User(avatar: "😀", bestTime: 0, gamesPlayed: 0, userName: "Player")
+        let newUser = User(avatar: "🎲", bestTime: 0, gamesPlayed: 0, userName: "")
         modelContext.insert(newUser)
         return newUser
     }
@@ -86,7 +104,7 @@ struct EmojiPickerView: View {
     @Binding var selectedEmoji: String
     @Environment(\.dismiss) var dismiss
 
-    let emojis = ["😀", "😎", "🤓", "🥳", "😺", "🐶", "🦊", "🐸", "🐙", "🦄"]
+    let emojis = ["😀", "😃", "😄", "😁", "😆", "😅", "🤣", "😂", "🙂", "🙃", "😉", "😊", "😇", "🥰", "😍", "🤩", "😘", "😗", "☺️", "😚", "😙", "😋", "😛", "😜", "🤪", "😝", "🤑", "🤗", "🤭", "🤫", "🤔", "🤐", "🤨", "😐", "😑", "😶", "😏", "😒", "🙄", "😬", "🤥", "😌", "😔", "😪", "🤤", "😴", "😷", "🤒", "🤕", "🤢", "🤮", "🤧", "🥵", "🥶", "🥴", "🤯", "😤", "🤬", "👿", "😈", "💀", "💩", "🤡", "🐵", "🐒", "🦍", "🦧", "🐶", "🐕", "🦮", "🐩", "🐺", "🦊", "🦝", "🐱", "🐈", "🦁", "🐯", "🐅", "🐆", "🐴", "🐎", "🦄", "🦓", "🦌", "🦬", "🐮", "🐂", "🐃", "🐄", "🐷", "🐖", "🐗", "🐽", "🐏", "🐑", "🐐", "🐪", "🐫", "🦙", "🦒", "🐘", "🦣", "🦏", "🦛", "🐭", "🐁", "🐀", "🐹", "🐰", "🐇", "🐿️", "🦫", "🦔", "🦇", "🐻", "🐨", "🐼", "🦥", "🦦", "🦨", "🦘", "🦡", "🦃", "🐔", "🐓", "🐣", "🐤", "🐥", "🐦", "🐧", "🕊️", "🦅", "🦆", "🦢", "🦉", "🦤", "🦩", "🦚", "🦜", "🐸", "🐊", "🐢", "🦎", "🐍", "🐲", "🐉", "🦕", "🦖", "🐳", "🐋", "🐬", "🦭", "🐟", "🐠", "🐡", "🦈", "🐙", "🐚", "🐌", "🦋", "🐛", "🐜", "🐝", "🪲", "🐞", "🦗", "🪳", "🕷️", "🦂", "🦟", "🪰", "🪱", "🦠"]
 
     var body: some View {
         NavigationView {
@@ -112,6 +130,5 @@ struct EmojiPickerView: View {
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
         UserProfileView()
-            .modelContainer(for: [User.self], inMemory: true)
     }
 }

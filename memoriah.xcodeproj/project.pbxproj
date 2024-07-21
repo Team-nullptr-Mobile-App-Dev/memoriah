@@ -19,6 +19,7 @@
 		315E4DA92C35F43D00FB99EC /* GameCompletionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4DA82C35F43400FB99EC /* GameCompletionView.swift */; };
 		315E4DAB2C35F56900FB99EC /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4DAA2C35F55600FB99EC /* CardView.swift */; };
 		317D2F762C4C294B007F1369 /* TODO.md in Resources */ = {isa = PBXBuildFile; fileRef = 317D2F752C4C294B007F1369 /* TODO.md */; };
+		31F448682C4CDD84002BB5F3 /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F448672C4CDD6D002BB5F3 /* PreviewContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		315E4DA82C35F43400FB99EC /* GameCompletionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCompletionView.swift; sourceTree = "<group>"; };
 		315E4DAA2C35F55600FB99EC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		317D2F752C4C294B007F1369 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
+		31F448672C4CDD6D002BB5F3 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		315E4D6F2C35E38300FB99EC /* memoriah */ = {
 			isa = PBXGroup;
 			children = (
+				31F448672C4CDD6D002BB5F3 /* PreviewContainer.swift */,
 				315E4DAA2C35F55600FB99EC /* CardView.swift */,
 				315E4DA82C35F43400FB99EC /* GameCompletionView.swift */,
 				315E4DA62C35EFB900FB99EC /* SettingsView.swift */,
@@ -261,6 +264,7 @@
 				315E4DA52C35EFAD00FB99EC /* UserProfileView.swift in Sources */,
 				315E4DAB2C35F56900FB99EC /* CardView.swift in Sources */,
 				315E4DA72C35EFC100FB99EC /* SettingsView.swift in Sources */,
+				31F448682C4CDD84002BB5F3 /* PreviewContainer.swift in Sources */,
 				315E4DA92C35F43D00FB99EC /* GameCompletionView.swift in Sources */,
 				315E4DA12C35EF2F00FB99EC /* GameBoardView.swift in Sources */,
 				315E4D732C35E38300FB99EC /* MainView.swift in Sources */,
@@ -433,8 +437,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -464,8 +468,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
