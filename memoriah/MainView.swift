@@ -11,14 +11,14 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Image(.brain3)
+                Image(.brain2)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .phaseAnimator([false, true]) { brain3, chromaRotate in brain3
+                    .phaseAnimator([false, true]) { brain2, chromaRotate in brain2
                         .scaleEffect(1, anchor: chromaRotate ? .bottom : .topTrailing)
-                        .hueRotation(.degrees(chromaRotate ? 60 : 0))
+                        .hueRotation(.degrees(chromaRotate ? 400 : 0))
                     } animation: { _ in
-                        .easeInOut(duration: 4)
+                        .easeInOut(duration: 2)
                     }
 
                 Text("memoriah")
