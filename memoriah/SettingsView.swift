@@ -15,10 +15,10 @@ struct SettingsView: View {
         Form {
             Section(header: Text("Appearance")) {
                 HStack {
-                    Toggle("Dark Mode", isOn: $isDarkMode)
-                    Spacer()
+//                    Spacer()
                     Image(systemName: isDarkMode ? "moon.fill" : "sun.max.fill")
                         .foregroundColor(isDarkMode ? .yellow : .orange)
+                    Toggle(isDarkMode ? "Dark Mode" : "Light Mode", isOn: $isDarkMode)
                 }
             }
 
@@ -88,3 +88,10 @@ struct SettingsView: View {
     }
 }
 
+// MARK: - PreviewProvider
+
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingsView()
+    }
+}

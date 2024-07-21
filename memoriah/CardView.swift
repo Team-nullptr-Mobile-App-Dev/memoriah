@@ -26,7 +26,7 @@ struct CardView: View {
                     )
             } else {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.blue)
+                    .fill(Color.accentColor)
                     .shadow(radius: 3)
             }
         }

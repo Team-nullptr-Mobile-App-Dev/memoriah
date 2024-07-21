@@ -5,10 +5,10 @@
     - [ ] add sound effects
   
 ## Styling changes
-    - [ ] implement dark mode
+    - [x] implement dark mode
     - [ ] Add avatar to leaderboard view
-    - [ ] add animation to main view
-    - [ ] button styling
+    - [x] add animation to main view
+    - [-] button styling
     - [ ] leaderboard styling
     - [ ] game over styling
     - [ ] game view styling

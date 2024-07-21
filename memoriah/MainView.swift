@@ -16,7 +16,7 @@ struct MainView: View {
                     .aspectRatio(contentMode: .fit)
                     .phaseAnimator([false, true]) { brain3, chromaRotate in brain3
                         .scaleEffect(1, anchor: chromaRotate ? .bottom : .topTrailing)
-                        .hueRotation(.degrees(chromaRotate ? 420 : 0))
+                        .hueRotation(.degrees(chromaRotate ? 60 : 0))
                     } animation: { _ in
                         .easeInOut(duration: 4)
                     }
@@ -40,14 +40,24 @@ struct MainView: View {
                     .font(.title)
                     .buttonStyle(.borderedProminent)
             }
-            .navigationBarItems(
-                leading: Button("Leaderboard") {
-                    showLeaderboard.toggle()
-                },
-                trailing: Button("Profile") {
-                    showProfile.toggle()
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        showLeaderboard.toggle()
+                    }) {
+                        Image(systemName: "chart.bar.xaxis.ascending.badge.clock")
+                    }
                 }
-            )
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        showProfile.toggle()
+                    }) {
+                        Image("custom.person.circle.fill.badge.gearshape.fill")
+                            .foregroundColor(.accentColor)
+                    }
+                }
+            }
             .sheet(isPresented: $showLeaderboard) {
                 LeaderboardView()
             }
@@ -65,4 +75,6 @@ struct MainView: View {
 
 #Preview {
     MainView()
+        .modelContainer(previewContainer)
+
 }
