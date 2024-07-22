@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A5E1DF52C4DE3B600DC660C /* Flashcard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5E1DF42C4DE3B600DC660C /* Flashcard.swift */; };
-		0A5E1DF72C4DE3DC00DC660C /* FlashcardCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5E1DF62C4DE3DC00DC660C /* FlashcardCreationView.swift */; };
-		0A5E1DF92C4DE3F300DC660C /* FlashcardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5E1DF82C4DE3F300DC660C /* FlashcardView.swift */; };
-		0A5E1DFB2C4DED0D00DC660C /* FlashcardQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5E1DFA2C4DED0D00DC660C /* FlashcardQuizView.swift */; };
 		314FB6B82C4C022000094371 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314FB6B72C4C022000094371 /* DataModels.swift */; };
 		315E4D712C35E38300FB99EC /* memoriahApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4D702C35E38300FB99EC /* memoriahApp.swift */; };
 		315E4D732C35E38300FB99EC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4D722C35E38300FB99EC /* MainView.swift */; };
@@ -24,7 +20,6 @@
 		315E4DAB2C35F56900FB99EC /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315E4DAA2C35F55600FB99EC /* CardView.swift */; };
 		317D2F762C4C294B007F1369 /* TODO.md in Resources */ = {isa = PBXBuildFile; fileRef = 317D2F752C4C294B007F1369 /* TODO.md */; };
 		31F448682C4CDD84002BB5F3 /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F448672C4CDD6D002BB5F3 /* PreviewContainer.swift */; };
-		31FDDD2B2C4E05B60030B45A /* GrowingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FDDD2A2C4E05B60030B45A /* GrowingButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,10 +40,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0A5E1DF42C4DE3B600DC660C /* Flashcard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flashcard.swift; sourceTree = "<group>"; };
-		0A5E1DF62C4DE3DC00DC660C /* FlashcardCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardCreationView.swift; sourceTree = "<group>"; };
-		0A5E1DF82C4DE3F300DC660C /* FlashcardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardView.swift; sourceTree = "<group>"; };
-		0A5E1DFA2C4DED0D00DC660C /* FlashcardQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardQuizView.swift; sourceTree = "<group>"; };
 		314FB6B72C4C022000094371 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
 		315E4D6D2C35E38300FB99EC /* memoriah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = memoriah.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		315E4D702C35E38300FB99EC /* memoriahApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = memoriahApp.swift; sourceTree = "<group>"; };
@@ -65,7 +56,6 @@
 		315E4DAA2C35F55600FB99EC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		317D2F752C4C294B007F1369 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		31F448672C4CDD6D002BB5F3 /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
-		31FDDD2A2C4E05B60030B45A /* GrowingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrowingButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,9 +106,6 @@
 			children = (
 				31F448672C4CDD6D002BB5F3 /* PreviewContainer.swift */,
 				315E4DAA2C35F55600FB99EC /* CardView.swift */,
-				0A5E1DF42C4DE3B600DC660C /* Flashcard.swift */,
-				0A5E1DF62C4DE3DC00DC660C /* FlashcardCreationView.swift */,
-				0A5E1DF82C4DE3F300DC660C /* FlashcardView.swift */,
 				315E4DA82C35F43400FB99EC /* GameCompletionView.swift */,
 				315E4DA62C35EFB900FB99EC /* SettingsView.swift */,
 				315E4DA42C35EFA100FB99EC /* UserProfileView.swift */,
@@ -126,8 +113,6 @@
 				315E4DA02C35EF2600FB99EC /* GameBoardView.swift */,
 				315E4D702C35E38300FB99EC /* memoriahApp.swift */,
 				315E4D722C35E38300FB99EC /* MainView.swift */,
-				31FDDD2A2C4E05B60030B45A /* GrowingButton.swift */,
-				0A5E1DFA2C4DED0D00DC660C /* FlashcardQuizView.swift */,
 				317D2F752C4C294B007F1369 /* TODO.md */,
 				314FB6B72C4C022000094371 /* DataModels.swift */,
 				315E4D742C35E38500FB99EC /* Assets.xcassets */,
@@ -277,19 +262,14 @@
 			files = (
 				314FB6B82C4C022000094371 /* DataModels.swift in Sources */,
 				315E4DA52C35EFAD00FB99EC /* UserProfileView.swift in Sources */,
-				0A5E1DF92C4DE3F300DC660C /* FlashcardView.swift in Sources */,
-				0A5E1DF72C4DE3DC00DC660C /* FlashcardCreationView.swift in Sources */,
-				0A5E1DFB2C4DED0D00DC660C /* FlashcardQuizView.swift in Sources */,
 				315E4DAB2C35F56900FB99EC /* CardView.swift in Sources */,
 				315E4DA72C35EFC100FB99EC /* SettingsView.swift in Sources */,
 				31F448682C4CDD84002BB5F3 /* PreviewContainer.swift in Sources */,
 				315E4DA92C35F43D00FB99EC /* GameCompletionView.swift in Sources */,
 				315E4DA12C35EF2F00FB99EC /* GameBoardView.swift in Sources */,
-				0A5E1DF52C4DE3B600DC660C /* Flashcard.swift in Sources */,
 				315E4D732C35E38300FB99EC /* MainView.swift in Sources */,
 				315E4D712C35E38300FB99EC /* memoriahApp.swift in Sources */,
 				315E4DA32C35EF6600FB99EC /* LeaderboardView.swift in Sources */,
-				31FDDD2B2C4E05B60030B45A /* GrowingButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
