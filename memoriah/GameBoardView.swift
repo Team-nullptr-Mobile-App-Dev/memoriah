@@ -1,5 +1,5 @@
 //  Created by Raidel Almeida on 7/3/24.
-//
+//  Modified by Henry Bueno on 7/21/24.
 // GameBoardView.swift
 // memoriah
 
@@ -20,28 +20,29 @@ struct GameBoardView: View {
     @State private var activeError: GameError?
     @Query private var users: [User]
     
-    let emojis = ["🐶", "🐱", "🐭", "🐹", "🐰"]
+    let imageNames = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"] // All 17 image names
     
     var body: some View {
         ZStack {
             if !isGameOver {
-                VStack {
-                    Text(timerText)
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2)) {
-                        ForEach(Array(cards.enumerated()), id: \.element.id) { index, card in
-                            CardView(card: card, isFlipped: flippedCardIndices.contains(index) || card.isMatched) {
-                                withAnimation {
-                                    flipCard(at: index)
-                                }
-                            }
-                        }
-                    }
-                }
-                .onAppear(perform: setupGame)
-                .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
-                    updateTimer()
-                }
-            } else {
+                           VStack {
+                               Text(timerText)
+                                      .font(.system(size: 36, weight: .bold))
+                               LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) { // 3 columns
+                                   ForEach(Array(cards.enumerated()), id: \.element.id) { index, card in
+                                       CardView(card: card, isFlipped: flippedCardIndices.contains(index) || card.isMatched) {
+                                           withAnimation {
+                                               flipCard(at: index)
+                                           }
+                                       }
+                                   }
+                               }
+                           }
+                           .onAppear(perform: setupGame)
+                           .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+                               updateTimer()
+                           }
+                } else {
                 GameCompletionView(
                     mode: mode == .practice ? "Practice" : "Timed",
                     score: score,
@@ -73,7 +74,17 @@ struct GameBoardView: View {
     }
 
     private func setupGame() {
-        cards = emojis.flatMap { [Card(content: $0), Card(content: $0)] }.shuffled()
+            // Ensure you have enough images for 3 columns (at least 6 images for pairs)
+        guard imageNames.count >= 6 else {
+        // Handle the case where you don't have enough images
+            print("Not enough images for 3 columns")
+            return
+        }
+
+        var selectedImageNames = Array(imageNames.shuffled().prefix(6)) // Select 6 images
+        selectedImageNames = selectedImageNames + selectedImageNames // Duplicate for pairs
+        cards = selectedImageNames.shuffled().map { Card(content: $0) }
+            
         timeElapsed = 0
         score = 0
         flippedCardIndices.removeAll()

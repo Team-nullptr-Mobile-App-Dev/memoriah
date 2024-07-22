@@ -39,6 +39,19 @@ struct MainView: View {
                 NavigationLink("⏰ Timed Mode", destination: GameBoardView(mode: .timed))
                     .font(.title)
                     .buttonStyle(.borderedProminent)
+               
+                NavigationLink("🖊️ Create Card", destination: FlashcardCreationView())
+                    .font(.title)
+                    .buttonStyle(.borderedProminent)
+                
+                NavigationLink("📓 Memory Cards", destination: FlashcardView())
+                    .font(.title)
+                    .buttonStyle(.borderedProminent)
+                
+                NavigationLink("🤓 Quiz Mode", destination: FlashcardQuizView())
+                    .font(.title)
+                    .padding(.bottom, 10)
+                    .buttonStyle(.borderedProminent)
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
