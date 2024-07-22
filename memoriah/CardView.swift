@@ -17,16 +17,14 @@ struct CardView: View {
     var body: some View {
         ZStack {
             if isFlipped {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.white)
+                Image(card.content) // Display the image when flipped
+                    .resizable()
+                    .scaledToFit()
+                    .cornerRadius(10)
                     .shadow(radius: 3)
-                    .overlay(
-                        Text(card.content)
-                            .font(.largeTitle)
-                    )
             } else {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.accentColor)
+                    .fill(Color.blue)
                     .shadow(radius: 3)
             }
         }

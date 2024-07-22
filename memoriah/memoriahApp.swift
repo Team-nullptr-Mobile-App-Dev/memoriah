@@ -17,6 +17,6 @@ struct MemoriahApp: App {
             MainView()
                 .preferredColorScheme(isDarkMode ? .dark : .light)
         }
-        .modelContainer(for: [User.self, GameSession.self])
+        .modelContainer(for: [User.self, GameSession.self, Flashcard.self])
     }
 }
