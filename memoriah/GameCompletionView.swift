@@ -59,7 +59,7 @@ struct GameCompletionView: View {
 				.shadow(radius: 5)
 			}
 
-			Button("Back to Main Menu") {
+			Button("Save and Exit") {
 				onDismiss(true)
 			}
 			.padding()
