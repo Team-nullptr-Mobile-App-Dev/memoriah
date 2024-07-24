@@ -9,11 +9,11 @@
     - [x] implement dark mode
     - [ ] Add avatar to leaderboard view
     - [x] add animation to main view
-    - [-] button styling
+    - [x] button styling
     - [x] leaderboard styling
     - [ ] game over styling
     - [ ] game view styling
     
-  
-  
-
+## Bug Fixes
+		- [x] game session being appended twice
+		- [ ] light apeareance text in leaderboard

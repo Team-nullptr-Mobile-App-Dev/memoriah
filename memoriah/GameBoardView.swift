@@ -62,7 +62,7 @@ struct GameBoardView: View {
 						dismiss()
 					},
 					onPlayAgain: {
-						saveGameSession(isExitingToMainMenu: false, playerWon: cards.allSatisfy(\.isMatched))
+//						saveGameSession(isExitingToMainMenu: false, playerWon: cards.allSatisfy(\.isMatched))
 						setupGame()
 					},
 					onNewGame: {
@@ -119,6 +119,7 @@ struct GameBoardView: View {
 			showAllCards = false
 		}
 	}
+
 	private func flipCard(at index: Int) {
 		guard !cards[index].isMatched, flippedCardIndices.count < 2 else { return }
 
@@ -167,7 +168,9 @@ struct GameBoardView: View {
 
 	private func endGame(playerWon: Bool) {
 		isGameOver = true
-		saveGameSession(isExitingToMainMenu: false, playerWon: playerWon)
+		if !playerWon {
+			saveGameSession(isExitingToMainMenu: false, playerWon: playerWon)
+		}
 	}
 
 	private func resetConsecutiveGames() {
@@ -175,6 +178,8 @@ struct GameBoardView: View {
 	}
 
 	private func saveGameSession(isExitingToMainMenu: Bool, playerWon: Bool) {
+		guard isExitingToMainMenu || !playerWon else { return }
+
 		guard let user = fetchOrCreateUser() else {
 			handleError(GameError.failedToFetchUser)
 			return
