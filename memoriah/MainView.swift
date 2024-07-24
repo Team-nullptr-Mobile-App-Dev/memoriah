@@ -39,21 +39,21 @@ struct MainView: View {
 					HStack {
 						NavigationLink(destination: GameBoardView(mode: .practice)) {
 							Text("👶 Practice Mode")
-							.font(.title3)
-							.frame(maxWidth: .infinity)
+								.font(.title3)
+								.frame(maxWidth: .infinity)
 						}
 						.buttonStyle(GrowingButton())
-						
-						NavigationLink( destination: GameBoardView(mode: .timed)) {
+
+						NavigationLink(destination: GameBoardView(mode: .timed)) {
 							Text("⏰ Timed Mode")
-							.font(.title3)
-							.frame(maxWidth: .infinity)
+								.font(.title3)
+								.frame(maxWidth: .infinity)
 						}
 						.buttonStyle(GrowingButton())
 					}
 					.frame(width: geometry.size.width)
 				}
-				
+
 				Text("Flashcards")
 					.font(.subheadline)
 				GeometryReader { geometry in
@@ -64,7 +64,7 @@ struct MainView: View {
 								.frame(maxWidth: .infinity)
 						}
 						.buttonStyle(GrowingButton())
-						
+
 						NavigationLink(destination: FlashcardView()) {
 							Text("📓 Memorize")
 								.font(.title3)
@@ -73,7 +73,6 @@ struct MainView: View {
 						.buttonStyle(GrowingButton())
 					}
 					.frame(width: geometry.size.width)
-//					.padding(.horizontal)
 				}
 				NavigationLink("🤓 Quiz Mode", destination: FlashcardQuizView())
 					.font(.title3)
